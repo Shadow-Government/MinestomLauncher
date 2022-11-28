@@ -6,6 +6,7 @@
 
 Minestom Launcher is a java software that runs a [Minestom](https://minestom.net/) server like you would do with Bukkit/Sponge/Quilt one.
 
+![alt text](.github/showcase.png)
 
 # Download
 It's simple as installing a spigot server: you must download the jar from the tags section on this github page and then
