@@ -1,2 +1,50 @@
-# MinestomLauncher
-Simple launcher to launch a Minestom server.
+![banner](.github/logo.gif)
+
+# Minestom Launcher
+![Java 17](https://img.shields.io/badge/language-Java%2017-9B599A.svg?label=language&style=for-the-badge&logo=appveyor&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)
+[![GitHub license](https://img.shields.io/github/license/The-Crown-Studios/MinestomLauncher?label=license&style=for-the-badge&logo=appveyor&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)](https://github.com/The-Crown-Studios/MinestomLauncher/blob/main/LICENSE)
+
+Minestom Launcher is a java software that runs a [Minestom](https://minestom.net/) server like you would do with Bukkit/Sponge/Quilt.
+
+
+# Download
+It's simple as installing a spigot server: you must download the jar from the tags section on this github page and then
+run the jar like you would do with the spigot one.
+
+# Configuration
+After the first start you will notice that a file named `server.json` will be created, this file
+is the equivalent of the server.properties for the spigot servers. You can change anything you need for your server,
+even possibility to change the `tps`(`ticks per second`) of the server between 20 and 120.
+
+**Note: The `server.json` on the repository only exists for testing purpose, the build script will ignore it!**
+
+
+```json
+{
+  "network" : {
+    "ip" : "127.0.0.1",
+    "port" : 25565,
+    "open_to_lan" : false
+  },
+  "proxy" : {
+    "enabled" : false,
+    "type" : "",
+    "secret" : ""
+  },
+  "server" : {
+    "ticks_per_second" : 20,
+    "chunk_view_distance" : 8,
+    "entity_view_distance" : 6,
+    "online_mode" : false,
+    "optifine_support" : true,
+    "terminal" : false,
+    "benchmark" : false
+  }
+}
+```
+
+# Logger Configuration
+The launcher will use a custom TinyLog configuration with default logs saving enabled and different formatting, if you want to change as you please the config go inside the jar and modify the file named `tinylog.properties`.
+
+# License
+This project is licensed under the [General Public License 3.0](LICENSE).

@@ -1,0 +1,21 @@
+{
+	"network": {
+	"ip": "127.0.0.1",
+	"port": 25565,
+	"open_to_lan": true
+	},
+	"proxy": {
+		"enabled": false,
+		"type": "velocity",
+		"secret": "password"
+	},
+	"server": {
+		"ticks_per_second": 20,
+		"chunk_view_distance": 8,
+		"entity_view_distance": 8,
+		"online_mode": true,
+		"optifine_support": true,
+		"terminal": false,
+		"benchmark": false
+	}
+}
