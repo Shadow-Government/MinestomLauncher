@@ -1,8 +1,8 @@
 ![banner](.github/logo.gif)
 
 # Minestom Launcher
-![Java 17](https://img.shields.io/badge/language-Java%2017-9B599A.svg?label=language&style=for-the-badge&logo=appveyor&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)
-[![GitHub license](https://img.shields.io/github/license/The-Crown-Studios/MinestomLauncher?label=license&style=for-the-badge&logo=appveyor&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)](https://github.com/The-Crown-Studios/MinestomLauncher/blob/main/LICENSE)
+![Java 17](https://img.shields.io/badge/language-Java%2017-9B599A.svg?label=language&style=for-the-badge&logo=github&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)
+[![GitHub license](https://img.shields.io/github/license/The-Crown-Studios/MinestomLauncher?label=license&style=for-the-badge&logo=gitbook&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)](https://github.com/The-Crown-Studios/MinestomLauncher/blob/main/LICENSE)
 
 Minestom Launcher is a Java software that runs a [Minestom](https://minestom.net/) server like you would do with Bukkit/Sponge/Quilt one.
 
@@ -15,7 +15,7 @@ run the jar like you would do with the spigot one. Obviously you can always clon
 # Minestom Configuration
 After the first start you will notice that a file named `server.json` will be created, this file
 is the equivalent of the server.properties for the bukkit servers. You can change anything you need for your server,
-even the `tps` (`ticks per second`) but the value must be between 20 and 120.
+even the `tps` (`ticks per second`), but the value must be between 20 and 120.
 
 ```json
 {
