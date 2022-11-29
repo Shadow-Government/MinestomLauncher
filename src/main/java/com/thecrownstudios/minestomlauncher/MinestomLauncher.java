@@ -149,6 +149,14 @@ public final class MinestomLauncher {
 				.append(newline())
 
 				.append(ARROW_COMPONENT)
+				.append(text("extensions: ", NamedTextColor.GRAY))
+				.append(text(MinecraftServer.getExtensionManager().getExtensions().size()))
+				.append(text(", ", NamedTextColor.GRAY))
+				.append(text("instances: ", NamedTextColor.GRAY))
+				.append(text(MinecraftServer.getInstanceManager().getInstances().size()))
+				.append(newline())
+
+				.append(ARROW_COMPONENT)
 				.append(text("tps: ", NamedTextColor.GRAY))
 				.append(text(serverData.ticksPerSecond()))
 				.append(text(", ", NamedTextColor.GRAY))
