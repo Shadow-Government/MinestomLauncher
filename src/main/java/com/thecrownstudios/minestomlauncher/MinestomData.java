@@ -13,14 +13,18 @@ public record MinestomData(
 		@NotNull Proxy proxyData,
 
 		@JsonProperty("server")
-		@NotNull Server serverData
+		@NotNull Server serverData,
+
+		@JsonProperty("instance")
+		@NotNull Instance instanceData
 ) {
 
 	public MinestomData() {
 		this(
 				new MinestomData.Network(),
 				new MinestomData.Proxy(),
-				new MinestomData.Server()
+				new MinestomData.Server(),
+				new MinestomData.Instance()
 		);
 	}
 
@@ -96,6 +100,22 @@ public record MinestomData(
 					true,
 					false,
 					false
+			);
+		}
+	}
+
+	@JsonRootName("instance")
+	public record Instance(
+			@JsonProperty("enabled")
+			boolean enabled,
+
+			@JsonProperty("type")
+			@NotNull String type
+	) {
+		public Instance() {
+			this(
+					false,
+					""
 			);
 		}
 	}

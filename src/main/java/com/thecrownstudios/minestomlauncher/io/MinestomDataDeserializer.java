@@ -27,9 +27,9 @@ public class MinestomDataDeserializer extends StdDeserializer<MinestomData> {
 		boolean	openToLan			=	networkDataNode.get("open_to_lan").asBoolean(false);
 
 		JsonNode proxyDataNode		=	node.get("proxy");
-		boolean enabled				=	proxyDataNode.get("enabled").asBoolean(false);
-		String type					=	proxyDataNode.get("type").asText();
-		String secret				=	proxyDataNode.get("secret").asText();
+		boolean proxy_enabled		=	proxyDataNode.get("enabled").asBoolean(false);
+		String proxy_type			=	proxyDataNode.get("type").asText();
+		String proxy_secret			=	proxyDataNode.get("secret").asText();
 
 		JsonNode serverDataNode		=	node.get("server");
 		int tick_per_second			=	serverDataNode.get("ticks_per_second").asInt(20);
@@ -40,6 +40,10 @@ public class MinestomDataDeserializer extends StdDeserializer<MinestomData> {
 		boolean terminal			=	serverDataNode.get("terminal").asBoolean(false);
 		boolean benchmark			=	serverDataNode.get("benchmark").asBoolean(false);
 
+		JsonNode instanceDataNode	=	node.get("instance");
+		boolean instance_enabled	=	instanceDataNode.get("enabled").asBoolean(false);
+		String instance_type		=	instanceDataNode.get("type").asText();
+
 		MinestomData.Network networkData	=	new MinestomData.Network(
 				ip,
 				port,
@@ -47,9 +51,9 @@ public class MinestomDataDeserializer extends StdDeserializer<MinestomData> {
 		);
 
 		MinestomData.Proxy proxyData		=	new MinestomData.Proxy(
-				enabled,
-				type,
-				secret
+				proxy_enabled,
+				proxy_type,
+				proxy_secret
 		);
 
 		MinestomData.Server serverData		=	new MinestomData.Server(
@@ -62,7 +66,12 @@ public class MinestomDataDeserializer extends StdDeserializer<MinestomData> {
 				benchmark
 		);
 
-		return new MinestomData(networkData, proxyData, serverData);
+		MinestomData.Instance instanceData		=	new MinestomData.Instance(
+				instance_enabled,
+				instance_type
+		);
+
+		return new MinestomData(networkData, proxyData, serverData, instanceData);
 	}
 
 }

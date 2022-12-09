@@ -41,6 +41,12 @@ public class MinestomDataSerializer extends StdSerializer<MinestomData> {
 		generator.writeBooleanField("terminal", false);
 		generator.writeBooleanField("benchmark", false);
 		generator.writeEndObject();
+
+		generator.writeObjectFieldStart("instance");
+		generator.writeBooleanField("enabled", false);
+		generator.writeStringField("type", "void");
+		generator.writeEndObject();
+
 		generator.writeEndObject();
 	}
 

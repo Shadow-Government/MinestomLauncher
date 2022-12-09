@@ -17,5 +17,9 @@
 		"optifine_support": true,
 		"terminal": false,
 		"benchmark": false
+	},
+	"instance": {
+		"enabled": false,
+		"type": "flat"
 	}
 }

@@ -8,9 +8,9 @@ Minestom Launcher is a Java software that runs a [Minestom](https://minestom.net
 
 ![alt text](.github/showcase.png)
 
-# Download
-It's simple as installing a bukkit server: you must download the jar from the tags section on this GitHub page and then
-run the jar like you would do with the bukkit one. Obviously you can always clone the repo and build the launcher yourself.
+# Download & Installation
+It's simple as installing a Bukkit server: you must download the jar from the tags section on this GitHub page and then
+run the jar like you would do with the bukkit one. Remember you can always clone the project and build it yourself.
 
 # Minestom Configuration
 After the first start you will notice that a file named `server.json` will be created, this file
@@ -37,6 +37,10 @@ even the `tps` (`ticks per second`), but the value must be between 20 and 120.
     "optifine_support" : true,
     "terminal" : false,
     "benchmark" : false
+  }, 
+  "instance": {
+    "enabled": false, 
+    "type": "flat"
   }
 }
 ```

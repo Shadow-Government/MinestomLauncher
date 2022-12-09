@@ -4,36 +4,39 @@ import com.thecrownstudios.minestomlauncher.command.ShutdownCommand;
 import com.thecrownstudios.minestomlauncher.util.FileResult;
 import com.thecrownstudios.minestomlauncher.util.FileUtil;
 import com.thecrownstudios.minestomlauncher.util.ObjectTriple;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.CommandManager;
+import net.minestom.server.coordinate.Pos;
+import net.minestom.server.entity.Player;
+import net.minestom.server.event.player.PlayerLoginEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.lan.OpenToLAN;
 import net.minestom.server.extras.optifine.OptifineSupport;
 import net.minestom.server.extras.velocity.VelocityProxy;
+import net.minestom.server.instance.InstanceContainer;
+import net.minestom.server.instance.InstanceManager;
+import net.minestom.server.instance.block.Block;
 import net.minestom.server.utils.time.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
 import java.time.Duration;
 
-import static com.thecrownstudios.minestomlauncher.util.MessageUtil.ARROW_COMPONENT;
-import static com.thecrownstudios.minestomlauncher.util.MessageUtil.LAUNCH_MESSAGE;
-import static net.kyori.adventure.text.Component.*;
+import static com.thecrownstudios.minestomlauncher.util.MessageUtil.*;
+import static net.kyori.adventure.text.Component.text;
 
 public final class MinestomLauncher {
 
-	public static final String COMMIT					=	"e5d0a43ba42c7023a93e8e33356909e614783ac7";
-	public static final String COMMIT_REDUCED			=	"e5d0a43ba4";
-	public static final String VERSION_NAME				=	"1.0";
+	private static final ComponentLogger LOGGER = ComponentLogger.logger(MinestomLauncher.class);
+
+	public static final String COMMIT					=	"d7feed23c8111eef2675d77ddf3dd832905e24fe";
+	public static final String COMMIT_REDUCED			=	"d7feed23c8";
+	public static final String VERSION_NAME				=	"1.1";
 	public static final String MINECRAFT_VERSION_NAME	=	"1.19.2";
 	public static final int MINECRAFT_VERSION_PROTOCOL	=	760;
-
-	private static final ComponentLogger LOGGER = ComponentLogger.logger(MinestomLauncher.class);
-	private static final String CONFIG_LOCATION = System.getProperty("config.location", "server.json");
+	public static final String CONFIG_LOCATION = System.getProperty("config.location", "server.json");
 
 	public MinestomLauncher() {}
 
@@ -47,6 +50,7 @@ public final class MinestomLauncher {
 		MinestomData.Network networkData	=	minestomData.networkData();
 		MinestomData.Proxy proxyData		=	minestomData.proxyData();
 		MinestomData.Server serverData		=	minestomData.serverData();
+		MinestomData.Instance instanceData	=	minestomData.instanceData();
 
 		System.setProperty("minestom.tps", String.valueOf(serverData.ticksPerSecond()));
 		System.setProperty("minestom.chunk-view-distance", String.valueOf(serverData.chunkViewDistance()));
@@ -78,6 +82,27 @@ public final class MinestomLauncher {
 			MinecraftServer.getBenchmarkManager().enable(Duration.of(10, TimeUnit.SECOND));
 		}
 
+		if (instanceData.enabled()) {
+			String instanceType = instanceData.type();
+			InstanceManager instanceManager = MinecraftServer.getInstanceManager();
+			InstanceContainer instanceContainer = instanceManager.createInstanceContainer();
+
+			if (instanceType.equalsIgnoreCase("flat")) {
+				loadFlatInstance(instanceContainer);
+			} else {
+				loadVoidInstance(instanceContainer);
+			}
+
+			instanceManager.registerInstance(instanceContainer);
+
+			MinecraftServer.getGlobalEventHandler().addListener(PlayerLoginEvent.class, event -> {
+				Player player = event.getPlayer();
+
+				event.setSpawningInstance(instanceContainer);
+				player.setRespawnPoint(new Pos(0, 62, 0));
+			});
+		}
+
 		CommandManager commandManager = MinecraftServer.getCommandManager();
 		commandManager.register(new ShutdownCommand());
 		//commandManager.register(new MinestomDefaultCommand());
@@ -87,7 +112,7 @@ public final class MinestomLauncher {
 
 		minecraftServer.start(networkData.ip(), networkData.port());
 
-		LOGGER.info(message(startMillis, result, networkData, serverData, proxyData));
+		LOGGER.info(configMessage(startMillis, result, networkData, serverData, proxyData));
 	}
 
 	private void shutdown() {
@@ -114,97 +139,30 @@ public final class MinestomLauncher {
 		}
 	}
 
-	private @NotNull Component message(
-			long startMillis,
-			@NotNull FileResult result,
-			@NotNull MinestomData.Network networkData,
-			@NotNull MinestomData.Server serverData,
-			@NotNull MinestomData.Proxy proxyData)
-	{
-		DecimalFormat decimalFormat = new DecimalFormat( "#,###" );
+	private void loadVoidInstance(@NotNull InstanceContainer instance) {
+		instance.setGenerator(null);
 
-		return text()
-				.append(text("Server launch results: "))
-				.append(newline())
-				.append(newline())
-
-				.append(ARROW_COMPONENT)
-				.append(text("config location: ", NamedTextColor.GRAY))
-				.append(text(CONFIG_LOCATION))
-				.append(text(", ", NamedTextColor.GRAY))
-				.append(switch (result) {
-					case EXISTING -> text("loaded from existing file");
-					case CREATED -> text("missing file, created a new one");
-					case MALFORMED -> empty();
-				})
-				.append(newline())
-
-				.append(ARROW_COMPONENT)
-				.append(text("server address: ", NamedTextColor.GRAY))
-				.append(text(networkData.ip()))
-				.append(text(":", NamedTextColor.GRAY))
-				.append(text(networkData.port()))
-				.append(text(", ", NamedTextColor.GRAY))
-				.append(retrieveProxyMessage(proxyData))
-				.append(newline())
-
-				.append(ARROW_COMPONENT)
-				.append(text("extensions: ", NamedTextColor.GRAY))
-				.append(text(MinecraftServer.getExtensionManager().getExtensions().size()))
-				.append(text(", ", NamedTextColor.GRAY))
-				.append(text("instances: ", NamedTextColor.GRAY))
-				.append(text(MinecraftServer.getInstanceManager().getInstances().size()))
-				.append(newline())
-
-				.append(ARROW_COMPONENT)
-				.append(text("tps: ", NamedTextColor.GRAY))
-				.append(text(serverData.ticksPerSecond()))
-				.append(text(", ", NamedTextColor.GRAY))
-				.append(text("chunk distance: ", NamedTextColor.GRAY))
-				.append(text(serverData.chunkViewDistance()))
-				.append(text(", ", NamedTextColor.GRAY))
-				.append(text("entity distance: ", NamedTextColor.GRAY))
-				.append(text(serverData.entityViewDistance()))
-				.append(newline())
-
-				.append(newline())
-				.append(text(" Server started in ", NamedTextColor.GRAY))
-				.append(text(decimalFormat.format(System.currentTimeMillis() - startMillis)))
-				.append(text("s", NamedTextColor.GRAY))
-				.append(newline())
-
-				.build();
-	}
-
-	private @NotNull Component malformedConfigMessage() {
-		return text()
-				.append(text("Error while launching the Minestom server:"))
-				.append(newline())
-
-				.append(newline())
-				.append(text(" The configuration file is malformed, for security", NamedTextColor.RED))
-				.append(newline())
-				.append(text(" and logistic reason the server will automatically", NamedTextColor.RED))
-				.append(newline())
-				.append(text(" stop in 5 seconds...", NamedTextColor.RED))
-				.append(newline())
-				.append(newline())
-
-				.build();
-	}
-
-	private @NotNull Component retrieveProxyMessage(@NotNull MinestomData.Proxy proxyData) {
-		if (proxyData.enabled()) {
-			String proxyType = proxyData.type();
-
-			if (proxyType.equalsIgnoreCase("velocity")) {
-				return text("under velocity proxy");
-			} else if (proxyType.equalsIgnoreCase("bungeecord")) {
-				return text("under bungeecord proxy");
+		for (int x = -16; x < 16; x++) {
+			for (int z = -16; z < 16; z++) {
+				instance.setBlock(x, 60, z, Block.GRAY_CONCRETE);
 			}
 		}
 
-		return text("under no proxy");
+		instance.setBlock(+0, 60, +0, Block.RED_CONCRETE);
+		instance.setBlock(-1, 60, +0, Block.RED_CONCRETE);
+		instance.setBlock(-1, 60, -1, Block.RED_CONCRETE);
+		instance.setBlock(+0, 60, -1, Block.RED_CONCRETE);
+	}
+
+	private void loadFlatInstance(@NotNull InstanceContainer instance) {
+		instance.setGenerator(unit -> unit.modifier()
+				.fillHeight(0, 61, Block.STONE)
+		);
+
+		instance.setBlock(+0, 60, +0, Block.RED_CONCRETE);
+		instance.setBlock(-1, 60, +0, Block.RED_CONCRETE);
+		instance.setBlock(+0, 60, -1, Block.RED_CONCRETE);
+		instance.setBlock(-1, 60, -1, Block.RED_CONCRETE);
 	}
 
 }

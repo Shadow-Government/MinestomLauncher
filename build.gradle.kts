@@ -1,7 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 group	=	"com.thecrownstudios"
-version	=	"1.0"
+version	=	"1.1"
 
 plugins {
 	id("java")
