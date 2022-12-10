@@ -9,12 +9,12 @@ Minestom Launcher is a Java software that runs a [Minestom](https://minestom.net
 ![alt text](.github/showcase.png)
 
 # Download & Installation
-It's simple as installing a Bukkit server: you must download the jar from the tags section on this GitHub page and then
+It's simple as installing a Bukkit server: you have to download the jar from the tags page and then
 run the jar like you would do with the bukkit one. Remember you can always clone the project and build it yourself.
 
 # Minestom Configuration
 After the first start you will notice that a file named `server.json` will be created, this file
-is the equivalent of the `server.properties` for the Bukkit servers. You can change anything you need for your server,
+is the equivalent of the `server.properties` of the Bukkit servers. You can change anything you want for your server,
 even the `tps` (`ticks per second`), but the value must be between 20 and 120.
 
 ```json
@@ -47,7 +47,7 @@ even the `tps` (`ticks per second`), but the value must be between 20 and 120.
 **NOTE: The `server.json` on the repository only exists for testing purpose, the build script will ignore it!**
 
 # Logger Configuration
-The launcher will use a custom TinyLog configuration with many changes and different formatting, if you want to change the config go inside the jar and modify the file named `tinylog.properties`**.**
+The launcher will use a custom TinyLog configuration with many changes and different formatting; if you want to change the config go inside the jar and modify the file named `tinylog.properties`**.**
 
 ```properties
 # this is the tinylog.properties inside the jar
