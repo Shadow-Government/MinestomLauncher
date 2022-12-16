@@ -52,7 +52,11 @@ repositories {
 }
 
 dependencies {
-	implementation("com.github.Minestom:Minestom:${project.property("minestom_version")}")
+	implementation("com.github.Minestom:Minestom:${project.property("minestom_version")}"){
+		exclude("org.jboss.shrinkwrap.resolver")
+		exclude("shrinkwrap-resolver-depchain")
+	}
+	implementation("org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:3.1.4")	//fix dep downloading
 	implementation("com.github.Articdive:JNoise:${project.property("jnoise_version")}")
 	implementation("com.github.CatDevz:SlimeLoader:master-SNAPSHOT")
 	implementation("net.kyori:adventure-text-minimessage:4.11.0")
