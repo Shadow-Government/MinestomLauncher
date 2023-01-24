@@ -31,11 +31,11 @@ public final class MinestomLauncher {
 
 	private static final ComponentLogger LOGGER = ComponentLogger.logger(MinestomLauncher.class);
 
-	public static final String COMMIT					=	"d7feed23c8111eef2675d77ddf3dd832905e24fe";
-	public static final String COMMIT_REDUCED			=	"d7feed23c8";
-	public static final String VERSION_NAME				=	"1.1";
-	public static final String MINECRAFT_VERSION_NAME	=	"1.19.2";
-	public static final int MINECRAFT_VERSION_PROTOCOL	=	760;
+	public static final String COMMIT = "c995f9c3a94a8206eceeddb83a76e2b88594d2ba";
+	public static final String COMMIT_REDUCED = "c995f9c3a9";
+	public static final String VERSION_NAME = "1.2";
+	public static final String MINECRAFT_VERSION_NAME = "1.19.2";
+	public static final int MINECRAFT_VERSION_PROTOCOL = 760;
 	public static final String CONFIG_LOCATION = System.getProperty("config.location", "server.json");
 
 	public MinestomLauncher() {}
@@ -47,16 +47,16 @@ public final class MinestomLauncher {
 	}
 
 	private void start(long startMillis, @NotNull FileResult result, @NotNull MinestomData minestomData) {
-		MinestomData.Network networkData	=	minestomData.networkData();
-		MinestomData.Proxy proxyData		=	minestomData.proxyData();
-		MinestomData.Server serverData		=	minestomData.serverData();
-		MinestomData.Instance instanceData	=	minestomData.instanceData();
+		MinestomData.Network networkData = minestomData.networkData();
+		MinestomData.Proxy proxyData = minestomData.proxyData();
+		MinestomData.Server serverData = minestomData.serverData();
+		MinestomData.Instance instanceData = minestomData.instanceData();
 
 		System.setProperty("minestom.tps", String.valueOf(serverData.ticksPerSecond()));
 		System.setProperty("minestom.chunk-view-distance", String.valueOf(serverData.chunkViewDistance()));
 		System.setProperty("minestom.entity-view-distance", String.valueOf(serverData.entityViewDistance()));
 
-		MinecraftServer minecraftServer		=	MinecraftServer.init();
+		MinecraftServer minecraftServer = MinecraftServer.init();
 
 		if (networkData.openToLan()) {
 			OpenToLAN.open();
@@ -156,7 +156,7 @@ public final class MinestomLauncher {
 
 	private void loadFlatInstance(@NotNull InstanceContainer instance) {
 		instance.setGenerator(unit -> unit.modifier()
-				.fillHeight(0, 61, Block.STONE)
+			.fillHeight(0, 61, Block.STONE)
 		);
 
 		instance.setBlock(+0, 60, +0, Block.RED_CONCRETE);

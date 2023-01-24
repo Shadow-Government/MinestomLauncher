@@ -17,7 +17,7 @@ public class MinestomDataSerializer extends StdSerializer<MinestomData> {
 	public void serialize(MinestomData minestomData, JsonGenerator generator, SerializerProvider provider) throws IOException {
 		MinestomData.Network networkData	=	minestomData.networkData();
 		MinestomData.Proxy proxyData		=	minestomData.proxyData();
-		MinestomData.Server serverData		=	minestomData.serverData();
+		MinestomData.Server serverData	=	minestomData.serverData();
 
 		generator.writeStartObject();
 		generator.writeObjectFieldStart("network");

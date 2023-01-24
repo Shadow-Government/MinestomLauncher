@@ -21,7 +21,7 @@ public class MinestomDataDeserializer extends StdDeserializer<MinestomData> {
 		ObjectCodec codec = parser.getCodec();
 		JsonNode node = codec.readTree(parser);
 
-		JsonNode networkDataNode	=	node.get("network");
+		JsonNode networkDataNode		=	node.get("network");
 		String ip					=	networkDataNode.get("ip").asText("127.0.0.1");
 		int port					=	networkDataNode.get("port").asInt(25565);
 		boolean	openToLan			=	networkDataNode.get("open_to_lan").asBoolean(false);
@@ -34,14 +34,14 @@ public class MinestomDataDeserializer extends StdDeserializer<MinestomData> {
 		JsonNode serverDataNode		=	node.get("server");
 		int tick_per_second			=	serverDataNode.get("ticks_per_second").asInt(20);
 		int chunk_view_distance		=	serverDataNode.get("chunk_view_distance").asInt(8);
-		int entity_view_distance	=	serverDataNode.get("entity_view_distance").asInt(6);
+		int entity_view_distance		=	serverDataNode.get("entity_view_distance").asInt(6);
 		boolean online_mode			=	serverDataNode.get("online_mode").asBoolean(true);
-		boolean optifine_support	=	serverDataNode.get("optifine_support").asBoolean(true);
+		boolean optifine_support		=	serverDataNode.get("optifine_support").asBoolean(true);
 		boolean terminal			=	serverDataNode.get("terminal").asBoolean(false);
 		boolean benchmark			=	serverDataNode.get("benchmark").asBoolean(false);
 
 		JsonNode instanceDataNode	=	node.get("instance");
-		boolean instance_enabled	=	instanceDataNode.get("enabled").asBoolean(false);
+		boolean instance_enabled		=	instanceDataNode.get("enabled").asBoolean(false);
 		String instance_type		=	instanceDataNode.get("type").asText();
 
 		MinestomData.Network networkData	=	new MinestomData.Network(
