@@ -20,7 +20,7 @@ jobs:
         run: ./gradlew build
 
       - name: Capture build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: "MinestomLauncher-CI-${GITHUB_SHA:0:10}"
+          name: MinestomLauncher-CI-${{GITHUB_SHA:0:10}}
           path: build/libs/
