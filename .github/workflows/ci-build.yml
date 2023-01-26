@@ -22,5 +22,5 @@ jobs:
       - name: Capture build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: MinestomLauncher-CI-${{ GITHUB_SHA:0:10 }}
+          name: MinestomLauncher-CI-${{ github.job_workflow_sha }}
           path: build/libs/
