@@ -15,7 +15,7 @@ run the jar like you would do with the bukkit one. Remember you can always clone
 # Minestom Configuration
 After the first start you will notice that a file named `server.json` will be created, this file
 is the equivalent of the `server.properties` for the Bukkit servers. You can change anything you need for your server,
-even the `tps` (`ticks per second`), but the value must be between 20 and 128.
+even the `tps` (`ticks per second`), but the value must be between 1 and 128.
 
 ```json
 {

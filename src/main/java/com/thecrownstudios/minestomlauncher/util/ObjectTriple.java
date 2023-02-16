@@ -3,8 +3,8 @@ package com.thecrownstudios.minestomlauncher.util;
 import org.jetbrains.annotations.Nullable;
 
 public record ObjectTriple<LEFT, MID, RIGHT>(
-		@Nullable LEFT left,
-		@Nullable MID mid,
+		@Nullable LEFT  left,
+		@Nullable MID   mid,
 		@Nullable RIGHT right
 ) {
 
@@ -17,8 +17,8 @@ public record ObjectTriple<LEFT, MID, RIGHT>(
 	 * @param right					the right-value.
 	 */
 	public static <LEFT, MID, RIGHT> ObjectTriple<LEFT, MID, RIGHT> of(
-			final @Nullable LEFT left,
-			final @Nullable MID mid,
+			final @Nullable LEFT  left,
+			final @Nullable MID   mid,
 			final @Nullable RIGHT right)
 	{
 		return new ObjectTriple<>(left, mid, right);

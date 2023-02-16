@@ -71,7 +71,7 @@ public record MinestomData(
 	@JsonRootName("server")
 	public record Server(
 			@JsonProperty("ticks_per_second")
-			@Range(from = 20, to = 128) int ticksPerSecond,
+			@Range(from = 1,  to = 128) int ticksPerSecond,
 
 			@JsonProperty("chunk_view_distance")
 			@Range(from = 2,  to = 32) int chunkViewDistance,

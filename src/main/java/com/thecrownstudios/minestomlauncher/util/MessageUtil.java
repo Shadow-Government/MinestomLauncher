@@ -66,7 +66,7 @@ public final class MessageUtil {
 			.append(newline())
 			.append(CUBE_COMPONENT_LINE)
 			.append(text("   MINESTOM LAUNCHER"))
-			.append(text(" 1.2", NamedTextColor.GRAY, TextDecoration.ITALIC))
+			.append(text(" 1.2.1", NamedTextColor.GRAY, TextDecoration.ITALIC))
 			.append(newline())
 			.append(CUBE_COMPONENT_LINE)
 
