@@ -31,8 +31,8 @@ public final class MinestomLauncher {
 
 	private static final ComponentLogger LOGGER = ComponentLogger.logger(MinestomLauncher.class);
 
-	public static final String COMMIT = "c995f9c3a94a8206eceeddb83a76e2b88594d2ba";
-	public static final String COMMIT_REDUCED = "c995f9c3a9";
+	public static final String COMMIT = "a9e319f96143a1147edfecb828dd484a98ea6880";
+	public static final String COMMIT_REDUCED = "a9e319f961";
 	public static final String VERSION_NAME = "1.2.1";
 	public static final String MINECRAFT_VERSION_NAME = "1.19.2";
 	public static final int MINECRAFT_VERSION_PROTOCOL = 760;

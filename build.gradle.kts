@@ -52,7 +52,7 @@ repositories {
 }
 
 dependencies {
-	val minestom_version    = project.properties["minestom_version"]    ?: "c995f9c3a9"
+	val minestom_version    = project.properties["minestom_version"]    ?: "a9e319f961"
 	val jnoise_version      = project.properties["jnoise_version"]      ?: "b93008e35e"
 	val minimessage_version = project.properties["minimessage_version"] ?: "4.11.0"
 
