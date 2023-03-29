@@ -1,7 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 group   = "com.thecrownstudios"
-version = "1.2.2"
+version = "1.2.3"
 
 plugins {
     id("java")
@@ -22,8 +22,10 @@ java {
 
     tasks.withType<Jar> {
         manifest {
-            attributes["Main-Class"] = "com.thecrownstudios.minestomlauncher.Main"
+            attributes["Main-Class"] = "${project.group}.minestomlauncher.Main"
         }
+
+        exclude("**/resources/server.json")
     }
 }
 
@@ -52,7 +54,7 @@ repositories {
 }
 
 dependencies {
-    val minestom_version    = project.properties["minestom_version"]    ?: "067227421f"
+    val minestom_version    = project.properties["minestom_version"]    ?: "9abb3079f6"
     val jnoise_version      = project.properties["jnoise_version"]      ?: "b93008e35e"
     val minimessage_version = project.properties["minimessage_version"] ?: "4.13.0"
 

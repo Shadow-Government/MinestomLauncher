@@ -47,7 +47,7 @@ even the `tps` (`ticks per second`), but the value must be between 1 and 128.
 **NOTE: The `server.json` on the repository only exists for testing purpose, the build script will ignore it!**
 
 # Logger Configuration
-The launcher will use a custom TinyLog configuration with many changes and different formatting, if you want to change the config go inside the jar and modify the file named `tinylog.properties`**.**
+The launcher use a custom TinyLog configuration with many changes and different formatting, if you want to change the config go inside the jar and modify the file named `tinylog.properties`**.**
 
 ```properties
 # this is the tinylog.properties inside the jar
@@ -76,7 +76,7 @@ writerFile.convert    = gzip
 ```
 
 # Roadmap
-- [ ] GitHub actions
+- [x] GitHub actions
 - [ ] Commands
 - [ ] Packs (add custom biomes, dimensions, modify blocks behavior)
 

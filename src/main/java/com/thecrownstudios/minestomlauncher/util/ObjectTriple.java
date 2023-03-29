@@ -12,9 +12,9 @@ public record ObjectTriple<LEFT, MID, RIGHT>(
      * Creates a new type-specific immutable ObjectTriple
      * with given left, mid and right value.
      *
-     * @param left					the left-value.
-     * @param mid					the mid-value.
-     * @param right					the right-value.
+     * @param left                  the left-value.
+     * @param mid                   the mid-value.
+     * @param right                 the right-value.
      */
     public static <LEFT, MID, RIGHT> ObjectTriple<LEFT, MID, RIGHT> of(
             final @Nullable LEFT  left,

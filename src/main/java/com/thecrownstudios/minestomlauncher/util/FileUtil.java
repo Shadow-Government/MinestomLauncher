@@ -12,13 +12,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public final class FileUtil {
 
     private FileUtil() {}
 
-    public static @NotNull ObjectTriple<FileResult, MinestomData, Exception> loadMinestomDataFromFile(@NotNull String file) {
-        File minestomDataFile = new File(file);
+    public static @NotNull ObjectTriple<FileResult, MinestomData, Exception> loadMinestomData(@NotNull Path path) {
+        File minestomDataFile = path.toFile();
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule("MinestomDataSerializer");
 
@@ -51,15 +52,11 @@ public final class FileUtil {
     }
 
     private static boolean createFileIfNeeded(@NotNull File file) {
-        //if (!file.exists()) {
         try {
             return file.createNewFile();
         } catch (IOException exc) {
             throw new RuntimeException(exc);
         }
-        //}
-
-        //return false;
     }
 
 }

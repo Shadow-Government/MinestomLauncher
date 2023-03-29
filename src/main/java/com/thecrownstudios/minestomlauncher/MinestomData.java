@@ -110,7 +110,7 @@ public record MinestomData(
             boolean enabled,
 
             @JsonProperty("type")
-            @NotNull String type
+            @NotNull String typeName
     ) {
         public Instance() {
             this(

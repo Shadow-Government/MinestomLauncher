@@ -6,6 +6,8 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.minestom.server.Git;
+import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.CommandSender;
 import net.minestom.server.command.ConsoleSender;
 import net.minestom.server.command.builder.Command;
@@ -44,7 +46,7 @@ public class MinestomVersionCommand extends Command {
 				.append(space())
 				.append(space())
 				.append(text("launcher: ", NamedTextColor.GRAY))
-				.append(text(MinestomLauncher.VERSION_NAME)
+				.append(text(MinestomLauncher.LAUNCHER_VERSION_NAME)
 						.hoverEvent(HoverEvent.showText(text("Open github project", NamedTextColor.GRAY)))
 						.clickEvent(openUrl(GITHUB_URL))
 				)
@@ -55,7 +57,7 @@ public class MinestomVersionCommand extends Command {
 				.append(space())
 				.append(space())
 				.append(text("commit: ", NamedTextColor.GRAY))
-				.append(text(MinestomLauncher.COMMIT_REDUCED)
+				.append(text(Git.commit())
 						.hoverEvent(HoverEvent.showText(text("Open commit URL", NamedTextColor.GRAY)))
 						.clickEvent(openUrl(MINESTOM_COMMIT_URL))
 				)
@@ -66,12 +68,12 @@ public class MinestomVersionCommand extends Command {
 				.append(space())
 				.append(space())
 				.append(text("version: ", NamedTextColor.GRAY))
-				.append(text(MinestomLauncher.MINECRAFT_VERSION_NAME)
+				.append(text(MinecraftServer.VERSION_NAME)
 						.hoverEvent(HoverEvent.showText(text("Open minestom minecraft version name URL", NamedTextColor.GRAY)))
 						.clickEvent(openUrl(MINESTOM_MINECRAFT_VERSION_NAME_URL))
 				)
 				.append(text(", ", NamedTextColor.GRAY))
-				.append(text(MinestomLauncher.MINECRAFT_VERSION_PROTOCOL)
+				.append(text(MinecraftServer.PROTOCOL_VERSION)
 						.hoverEvent(HoverEvent.showText(text("Open minestom minecraft version protocol URL", NamedTextColor.GRAY)))
 						.clickEvent(openUrl(MINESTOM_MINECRAFT_VERSION_PROTOCOL_URL))
 				)

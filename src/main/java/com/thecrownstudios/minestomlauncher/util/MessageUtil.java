@@ -6,6 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import net.minestom.server.Git;
 import net.minestom.server.MinecraftServer;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,7 @@ public final class MessageUtil {
     private static final DecimalFormat decimalFormat = new DecimalFormat( "##0,000" );
 
     public static final String GITHUB_URL = "https://github.com/The-Crown-Studios/MinestomLauncher";
-    public static final String MINESTOM_COMMIT_URL = "https://github.com/Minestom/Minestom/commit/" + MinestomLauncher.COMMIT;
+    public static final String MINESTOM_COMMIT_URL = "https://github.com/Minestom/Minestom/commit/" + Git.commit();
     public static final String MINESTOM_MINECRAFT_VERSION_NAME_URL = "https://github.com/Minestom/Minestom/blob/master/src/main/java/net/minestom/server/MinecraftServer.java#L48";
     public static final String MINESTOM_MINECRAFT_VERSION_PROTOCOL_URL = "https://github.com/Minestom/Minestom/blob/master/src/main/java/net/minestom/server/MinecraftServer.java#L49";
 
@@ -66,7 +67,7 @@ public final class MessageUtil {
             .append(newline())
             .append(CUBE_COMPONENT_LINE)
             .append(text("   MINESTOM LAUNCHER"))
-            .append(text(" 1.2.2", NamedTextColor.GRAY, TextDecoration.ITALIC))
+            .append(space().append(text(MinestomLauncher.LAUNCHER_VERSION_NAME, NamedTextColor.GRAY, TextDecoration.ITALIC)))
             .append(newline())
             .append(CUBE_COMPONENT_LINE)
 
@@ -93,14 +94,14 @@ public final class MessageUtil {
 
             .append(ARROW_COMPONENT)
             .append(text("commit: ", NamedTextColor.GRAY))
-            .append(text(MinestomLauncher.COMMIT))
+            .append(text(Git.commit()))
             .append(newline())
 
             .append(ARROW_COMPONENT)
             .append(text("version: ", NamedTextColor.GRAY))
-            .append(text(MinestomLauncher.MINECRAFT_VERSION_NAME))
+            .append(text(MinecraftServer.VERSION_NAME))
             .append(text(" - ", NamedTextColor.GRAY))
-            .append(text(MinestomLauncher.MINECRAFT_VERSION_PROTOCOL))
+            .append(text(MinecraftServer.PROTOCOL_VERSION))
             .append(newline())
 
             .build();
@@ -199,9 +200,9 @@ public final class MessageUtil {
 
     private static @NotNull Component configResultMessage(@NotNull FileResult result) {
         return switch (result) {
-            case EXISTING ->	text("loaded from existing file");
-            case CREATED ->		text("missing file, created a new one");
-            case MALFORMED ->	empty();
+            case EXISTING  -> text("loaded from existing file");
+            case CREATED   -> text("missing file, created a new one");
+            case MALFORMED -> empty();
         };
     }
 
