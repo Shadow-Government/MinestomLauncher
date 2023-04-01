@@ -33,6 +33,10 @@ shadow {
     tasks.withType<ShadowJar> {
         exclude("server.json")
 
+        //dependencies {
+        //    exclude(dependency("it.unimi.dsi:fastutil"))
+        //}
+
         println(message = "SHADOWJAR INFORMATION")
         println(message = "- project_name:     ${rootProject.name}")
         println(message = "- module_name:      ${archiveBaseName.get()}")
@@ -40,7 +44,6 @@ shadow {
         println(message = "- module_extension: ${archiveExtension.get()}")
         println()
 
-        //archiveFileName.set("minestom.${archiveExtension.get()}")
         archiveFileName.set("${rootProject.name}-${archiveVersion.get()}.${archiveExtension.get()}")
     }
 }
@@ -63,4 +66,10 @@ dependencies {
     implementation("com.github.CatDevz:SlimeLoader:master-SNAPSHOT")
     implementation("net.kyori:adventure-text-minimessage:$minimessage_version")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+}
+
+tasks {
+    build {
+        finalizedBy(shadowJar)
+    }
 }
