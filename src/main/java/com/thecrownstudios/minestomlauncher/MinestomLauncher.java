@@ -32,7 +32,7 @@ public final class MinestomLauncher {
 
     private static final ComponentLogger LOGGER = ComponentLogger.logger(MinestomLauncher.class);
 
-    public static final String LAUNCHER_VERSION_NAME = "1.2.3";
+    public static final String LAUNCHER_VERSION_NAME = "1.2.4";
     public static final String CONFIG_LOCATION = System.getProperty("config.location", "server.json");
 
     public MinestomLauncher() {}

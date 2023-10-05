@@ -66,7 +66,7 @@ public final class MessageUtil {
             .append(CUBE_COMPONENT_LINE)
             .append(newline())
             .append(CUBE_COMPONENT_LINE)
-            .append(text("   MINESTOM LAUNCHER"))
+            .append(text("   MINESTOM LAUNCHER", NamedTextColor.WHITE))
             .append(space().append(text(MinestomLauncher.LAUNCHER_VERSION_NAME, NamedTextColor.GRAY, TextDecoration.ITALIC)))
             .append(newline())
             .append(CUBE_COMPONENT_LINE)
@@ -76,32 +76,32 @@ public final class MessageUtil {
 
             .append(ARROW_COMPONENT)
             .append(text("os info: ", NamedTextColor.GRAY))
-            .append(text(System.getProperty("os.name")))
+            .append(text(System.getProperty("os.name"), NamedTextColor.WHITE))
             .append(text(", ", NamedTextColor.GRAY))
-            .append(text(System.getProperty("os.version")))
+            .append(text(System.getProperty("os.version"), NamedTextColor.WHITE))
             .append(text(" - ", NamedTextColor.GRAY))
-            .append(text(System.getProperty("os.arch")))
+            .append(text(System.getProperty("os.arch"), NamedTextColor.WHITE))
             .append(newline())
 
             .append(ARROW_COMPONENT)
             .append(text("java info: ", NamedTextColor.GRAY))
-            .append(text(System.getProperty("java.version")))
+            .append(text(System.getProperty("java.version"), NamedTextColor.WHITE))
             .append(text(" - ", NamedTextColor.GRAY))
-            .append(text(System.getProperty("java.vendor")))
+            .append(text(System.getProperty("java.vendor"), NamedTextColor.WHITE))
             .append(text(", ", NamedTextColor.GRAY))
-            .append(text(System.getProperty("java.vendor.url")))
+            .append(text(System.getProperty("java.vendor.url"), NamedTextColor.WHITE))
             .append(newline())
 
             .append(ARROW_COMPONENT)
             .append(text("commit: ", NamedTextColor.GRAY))
-            .append(text(Git.commit()))
+            .append(text(Git.commit(), NamedTextColor.WHITE))
             .append(newline())
 
             .append(ARROW_COMPONENT)
             .append(text("version: ", NamedTextColor.GRAY))
-            .append(text(MinecraftServer.VERSION_NAME))
+            .append(text(MinecraftServer.VERSION_NAME, NamedTextColor.WHITE))
             .append(text(" - ", NamedTextColor.GRAY))
-            .append(text(MinecraftServer.PROTOCOL_VERSION))
+            .append(text(MinecraftServer.PROTOCOL_VERSION, NamedTextColor.WHITE))
             .append(newline())
 
             .build();
@@ -122,7 +122,7 @@ public final class MessageUtil {
         textBuilder
                 .append(ARROW_COMPONENT)
                 .append(text("config location: ", NamedTextColor.GRAY))
-                .append(text(MinestomLauncher.CONFIG_LOCATION))
+                .append(text(MinestomLauncher.CONFIG_LOCATION, NamedTextColor.WHITE))
                 .append(text(", ", NamedTextColor.GRAY))
                 .append(configResultMessage(result))
                 .append(newline());
@@ -130,9 +130,9 @@ public final class MessageUtil {
         textBuilder
                 .append(ARROW_COMPONENT)
                 .append(text("server address: ", NamedTextColor.GRAY))
-                .append(text(networkData.ip()))
+                .append(text(networkData.ip(), NamedTextColor.WHITE))
                 .append(text(":", NamedTextColor.GRAY))
-                .append(text(networkData.port()))
+                .append(text(networkData.port(), NamedTextColor.WHITE))
                 .append(text(", ", NamedTextColor.GRAY))
                 .append(proxyResultMessage(proxyData))
                 .append(newline());
@@ -140,25 +140,25 @@ public final class MessageUtil {
         textBuilder
                 .append(ARROW_COMPONENT)
                 .append(text("extensions: ", NamedTextColor.GRAY))
-                .append(text(MinecraftServer.getExtensionManager().getExtensions().size()))
+                .append(text(MinecraftServer.getExtensionManager().getExtensions().size(), NamedTextColor.WHITE))
                 .append(text(", ", NamedTextColor.GRAY))
                 .append(text("instances: ", NamedTextColor.GRAY))
-                .append(text(MinecraftServer.getInstanceManager().getInstances().size()))
+                .append(text(MinecraftServer.getInstanceManager().getInstances().size(), NamedTextColor.WHITE))
                 .append(newline());
 
         textBuilder
                 .append(ARROW_COMPONENT)
                 .append(text("tps: ", NamedTextColor.GRAY))
-                .append(text(serverData.ticksPerSecond()))
+                .append(text(serverData.ticksPerSecond(), NamedTextColor.WHITE))
                 .append(text(", ", NamedTextColor.GRAY))
                 .append(text("chunk distance: ", NamedTextColor.GRAY))
-                .append(text(serverData.chunkViewDistance()))
+                .append(text(serverData.chunkViewDistance(), NamedTextColor.WHITE))
                 .append(text(", ", NamedTextColor.GRAY))
                 .append(text("entity distance: ", NamedTextColor.GRAY))
-                .append(text(serverData.entityViewDistance()))
+                .append(text(serverData.entityViewDistance(), NamedTextColor.WHITE))
                 .append(newline());
 
-        if (MinecraftServer.getInstanceManager().getInstances().size() == 0) {
+        if (MinecraftServer.getInstanceManager().getInstances().isEmpty()) {
             textBuilder
                     .append(newline())
                     .append(text(" ! ", NamedTextColor.GOLD))
@@ -171,7 +171,7 @@ public final class MessageUtil {
         textBuilder
                 .append(newline())
                 .append(text(" Server started in ", NamedTextColor.GRAY))
-                .append(text(decimalFormat.format(System.currentTimeMillis() - startMillis)))
+                .append(text(decimalFormat.format(System.currentTimeMillis() - startMillis), NamedTextColor.WHITE))
                 .append(text("s", NamedTextColor.GRAY))
                 .append(newline());
 
@@ -200,8 +200,8 @@ public final class MessageUtil {
 
     private static @NotNull Component configResultMessage(@NotNull FileResult result) {
         return switch (result) {
-            case EXISTING  -> text("loaded from existing file");
-            case CREATED   -> text("missing file, created a new one");
+            case EXISTING  -> text("loaded from existing file", NamedTextColor.WHITE);
+            case CREATED   -> text("missing file, created a new one", NamedTextColor.WHITE);
             case MALFORMED -> empty();
         };
     }
@@ -211,13 +211,13 @@ public final class MessageUtil {
             String proxyType = proxyData.type();
 
             if (proxyType.equalsIgnoreCase("velocity")) {
-                return text("under velocity proxy");
+                return text("under velocity proxy", NamedTextColor.WHITE);
             } else if (proxyType.equalsIgnoreCase("bungeecord")) {
-                return text("under bungeecord proxy");
+                return text("under bungeecord proxy", NamedTextColor.WHITE);
             }
         }
 
-        return text("under no proxy");
+        return text("under no proxy", NamedTextColor.WHITE);
     }
 
 }
