@@ -12,6 +12,10 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 
+    tasks.withType<ProcessResources> {
+        filteringCharset = "UTF-8"
+    }
+
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
     }
@@ -26,10 +30,6 @@ java {
         }
 
         exclude("**/resources/server.json")
-    }
-
-    tasks.withType<ProcessResources> {
-        filteringCharset = "UTF-8"
     }
 }
 
@@ -73,12 +73,13 @@ dependencies {
     val minestom_version    = project.property("minestom_version")!! as String
     val jnoise_version      = project.property("jnoise_version")!! as String
     val minimessage_version = project.property("minimessage_version")!! as String
+    val jackson_version     = project.property("jackson_version")!! as String
 
     implementation("com.github.Minestom:Minestom:$minestom_version")
     implementation("de.articdive:jnoise-pipeline:$jnoise_version")
     implementation("com.github.CatDevz:SlimeLoader:master-SNAPSHOT")
     implementation("net.kyori:adventure-text-minimessage:$minimessage_version")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jackson_version")
 }
 
 tasks {
