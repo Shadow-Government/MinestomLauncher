@@ -10,8 +10,12 @@ base {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 
     tasks.withType<ProcessResources> {
         filteringCharset = "UTF-8"
@@ -57,14 +61,16 @@ repositories {
 }
 
 dependencies {
-    val minestom_version    = findProperty("minestom_version")
-    val jnoise_version      = findProperty("jnoise_version")
-    val polar_version       = findProperty("polar_version")
-    val minimessage_version = findProperty("minimessage_version")
-    val jackson_version     = findProperty("jackson_version")
+    val minestom_version            = findProperty("minestom_version")
+    val minestom_extensions_version = findProperty("minestom_extensions_version")
+    val jnoise_version              = findProperty("jnoise_version")
+    val polar_version               = findProperty("polar_version")
+    val minimessage_version         = findProperty("minimessage_version")
+    val jackson_version             = findProperty("jackson_version")
 
     // Important
     implementation("net.minestom", "minestom-snapshots", "$minestom_version")
+    implementation("dev.hollowcube", "minestom-ce-extensions", "$minestom_extensions_version")
     implementation("de.articdive", "jnoise-pipeline", "$jnoise_version")
 
     // World formats

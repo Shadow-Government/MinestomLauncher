@@ -5,17 +5,17 @@ import com.thecrownstudios.minestomlauncher.util.FileResult;
 import com.thecrownstudios.minestomlauncher.util.FileUtil;
 import com.thecrownstudios.minestomlauncher.util.InstanceGenUtil;
 import com.thecrownstudios.minestomlauncher.util.ObjectTriple;
+import net.hollowcube.minestom.extensions.ExtensionBootstrap;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.command.CommandManager;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.entity.Player;
-import net.minestom.server.event.player.PlayerLoginEvent;
+import net.minestom.server.event.player.AsyncPlayerConfigurationEvent;
 import net.minestom.server.extras.MojangAuth;
 import net.minestom.server.extras.bungee.BungeeCordProxy;
 import net.minestom.server.extras.lan.OpenToLAN;
-import net.minestom.server.extras.optifine.OptifineSupport;
 import net.minestom.server.extras.velocity.VelocityProxy;
 import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
@@ -63,15 +63,20 @@ public final class MinestomLauncher {
         System.setProperty("minestom.chunk-view-distance", String.valueOf(serverData.chunkViewDistance()));
         System.setProperty("minestom.entity-view-distance", String.valueOf(serverData.entityViewDistance()));
 
-        MinecraftServer minecraftServer = MinecraftServer.init();
+        // Without Extensions
+        // MinecraftServer minecraftServer = MinecraftServer.init();
+
+        // With Extensions
+        ExtensionBootstrap minecraftServer = ExtensionBootstrap.init();
 
         if (networkData.openToLan()) {
             OpenToLAN.open();
         }
 
-        if (serverData.optifineSupport()) {
-            OptifineSupport.enable();
-        }
+        // Optifine is dead, going to remove it
+        //if (serverData.optifineSupport()) {
+        //     OptifineSupport.enable();
+        //}
 
         if (proxyData.enabled()) {
             String proxyType = proxyData.type();
@@ -97,7 +102,7 @@ public final class MinestomLauncher {
             InstanceGenUtil.loadInstance(instanceTypeName, instanceContainer);
             instanceManager.registerInstance(instanceContainer);
 
-            MinecraftServer.getGlobalEventHandler().addListener(PlayerLoginEvent.class, event -> {
+            MinecraftServer.getGlobalEventHandler().addListener(AsyncPlayerConfigurationEvent.class, event -> {
                 Player player = event.getPlayer();
 
                 event.setSpawningInstance(instanceContainer);
