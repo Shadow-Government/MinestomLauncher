@@ -1,7 +1,7 @@
 ![banner](.github/logo.gif)
 
 # Minestom Launcher
-![Java 17](https://img.shields.io/badge/language-Java%2017-9B599A.svg?label=language&style=for-the-badge&logo=github&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)
+![Java 21](https://img.shields.io/badge/language-Java%2017-9B599A.svg?label=language&style=for-the-badge&logo=github&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)
 [![GitHub license](https://img.shields.io/github/license/The-Crown-Studios/MinestomLauncher?label=license&style=for-the-badge&logo=gitbook&logoColor=ff6c32&labelColor=ffffff&color=ff76b6)](https://github.com/The-Crown-Studios/MinestomLauncher/blob/main/LICENSE)
 
 Minestom Launcher is a Java software that runs a [Minestom](https://minestom.net/) server like you would do with Bukkit/Sponge/Quilt.
