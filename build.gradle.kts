@@ -61,25 +61,41 @@ repositories {
 }
 
 dependencies {
-    val minestom_version            = findProperty("minestom_version")
-    val minestom_extensions_version = findProperty("minestom_extensions_version")
-    val jnoise_version              = findProperty("jnoise_version")
-    val polar_version               = findProperty("polar_version")
-    val minimessage_version         = findProperty("minimessage_version")
-    val jackson_version             = findProperty("jackson_version")
+    val minestom_version             = findProperty("minestom_version")
+    val minestom_extensions_version  = findProperty("minestom_extensions_version")
 
-    // Important
+    val slimeloader_version          = findProperty("slimeloader_version")
+    val polar_version                = findProperty("polar_version")
+
+    val minimessage_version          = findProperty("minimessage_version")
+    val jackson_version              = findProperty("jackson_version")
+    val jnoise_version               = findProperty("jnoise_version")
+
+    val ansi_version                 = findProperty("ansi_version")
+    val jansi_version                = findProperty("jansi_version")
+    val jline_version                = findProperty("jline_version")
+    val jline_terminal_jansi_version = findProperty("jline_terminal_jansi_version")
+    val log4j_version                = findProperty("log4j_version")
+
+    // Minestom modules
     implementation("net.minestom", "minestom-snapshots", "$minestom_version")
     implementation("dev.hollowcube", "minestom-ce-extensions", "$minestom_extensions_version")
-    implementation("de.articdive", "jnoise-pipeline", "$jnoise_version")
 
     // World formats
-    implementation("com.github.CatDevz", "SlimeLoader", "master-SNAPSHOT")
+    implementation("com.github.CatDevz", "SlimeLoader", "$slimeloader_version")
     implementation("dev.hollowcube", "polar", "$polar_version")
 
     // Misc
     implementation("net.kyori", "adventure-text-minimessage", "$minimessage_version")
     implementation("com.fasterxml.jackson.core", "jackson-databind", "$jackson_version")
+    implementation("de.articdive", "jnoise-pipeline", "$jnoise_version")
+
+    // Terminal & Logging
+    implementation("net.kyori", "ansi", "$ansi_version")
+    implementation("org.fusesource.jansi", "jansi", "$jansi_version")
+    implementation("org.jline", "jline", "$jline_version")
+    implementation("org.jline", "jline-terminal-jansi", "$jline_terminal_jansi_version")
+    implementation("org.apache.logging.log4j", "log4j-core", "$log4j_version")
 }
 
 tasks {
