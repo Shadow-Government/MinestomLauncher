@@ -2,6 +2,7 @@ package com.thecrownstudios.minestomlauncher.util;
 
 import com.thecrownstudios.minestomlauncher.MinestomData;
 import com.thecrownstudios.minestomlauncher.MinestomLauncher;
+import net.hollowcube.minestom.extensions.ExtensionBootstrap;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -140,7 +141,8 @@ public final class MessageUtil {
         textBuilder
                 .append(ARROW_COMPONENT)
                 .append(text("extensions: ", NamedTextColor.GRAY))
-                .append(text(MinecraftServer.getExtensionManager().getExtensions().size(), NamedTextColor.WHITE))
+                //.append(text(MinecraftServer.getExtensionManager().getExtensions().size(), NamedTextColor.WHITE))
+                .append(text(ExtensionBootstrap.getExtensionManager().getExtensions().size(), NamedTextColor.WHITE))
                 .append(text(", ", NamedTextColor.GRAY))
                 .append(text("instances: ", NamedTextColor.GRAY))
                 .append(text(MinecraftServer.getInstanceManager().getInstances().size(), NamedTextColor.WHITE))
