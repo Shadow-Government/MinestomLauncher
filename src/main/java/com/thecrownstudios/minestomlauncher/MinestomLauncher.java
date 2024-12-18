@@ -1,6 +1,8 @@
 package com.thecrownstudios.minestomlauncher;
 
 import com.thecrownstudios.minestomlauncher.command.ShutdownCommand;
+import com.thecrownstudios.minestomlauncher.terminal.ConsoleInputManager;
+import com.thecrownstudios.minestomlauncher.terminal.TinyComponentLogger;
 import com.thecrownstudios.minestomlauncher.util.FileResult;
 import com.thecrownstudios.minestomlauncher.util.FileUtil;
 import com.thecrownstudios.minestomlauncher.util.InstanceGenUtil;
@@ -21,6 +23,7 @@ import net.minestom.server.instance.InstanceContainer;
 import net.minestom.server.instance.InstanceManager;
 import net.minestom.server.utils.time.TimeUnit;
 import org.jetbrains.annotations.NotNull;
+import org.tinylog.Logger;
 
 import java.nio.file.Path;
 import java.time.Duration;
@@ -32,13 +35,13 @@ public final class MinestomLauncher {
 
     private static final ComponentLogger LOGGER = ComponentLogger.logger(MinestomLauncher.class);
 
-    public static final String LAUNCHER_VERSION_NAME = "1.2.4";
+    public static final String LAUNCHER_VERSION_NAME = "1.3";
     public static final String CONFIG_LOCATION = System.getProperty("config.location", "server.json");
 
     public MinestomLauncher() {}
 
     public void init() {
-        LOGGER.info(LAUNCH_MESSAGE);
+        TinyComponentLogger.info(LAUNCH_MESSAGE);
 
         loadConfiguration();
     }
@@ -72,11 +75,6 @@ public final class MinestomLauncher {
         if (networkData.openToLan()) {
             OpenToLAN.open();
         }
-
-        // Optifine is dead, going to remove it
-        //if (serverData.optifineSupport()) {
-        //     OptifineSupport.enable();
-        //}
 
         if (proxyData.enabled()) {
             String proxyType = proxyData.type();
@@ -119,11 +117,13 @@ public final class MinestomLauncher {
 
         minecraftServer.start(networkData.ip(), networkData.port());
 
-        LOGGER.info(configMessage(startMillis, result, networkData, serverData, proxyData));
+        TinyComponentLogger.info(configMessage(startMillis, result, networkData, serverData, proxyData));
+
+        ConsoleInputManager consoleInputManager = new ConsoleInputManager(commandManager);
     }
 
     private void shutdown() {
-        LOGGER.info(malformedConfigMessage());
+        TinyComponentLogger.info(malformedConfigMessage());
 
         try {
             Thread.sleep(5000);

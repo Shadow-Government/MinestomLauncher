@@ -55,12 +55,12 @@ public final class MessageUtil {
 
     public static final Component ARROW_COMPONENT = text()
             .append(text(" "))
-            .append(text(ARROW, NamedTextColor.GRAY, TextDecoration.BOLD))
+            .append(text(ARROW, NamedTextColor.WHITE, TextDecoration.BOLD))
             .append(space())
             .build();
 
     public static final Component LAUNCH_MESSAGE = text()
-            .append(text("Starting Minestom launcher."))
+            .append(text("Starting Minestom launcher.", NamedTextColor.WHITE))
             .append(newline())
             .append(newline())
 
@@ -95,7 +95,7 @@ public final class MessageUtil {
 
             .append(ARROW_COMPONENT)
             .append(text("commit: ", NamedTextColor.GRAY))
-            .append(text(Git.commit(), NamedTextColor.WHITE))
+            //.append(text(Git.commit(), NamedTextColor.WHITE))
             .append(newline())
 
             .append(ARROW_COMPONENT)
@@ -116,7 +116,7 @@ public final class MessageUtil {
         TextComponent.Builder textBuilder = text();
 
         textBuilder
-                .append(text("Server launch results: "))
+                .append(text("Server launch results: ", NamedTextColor.WHITE))
                 .append(newline())
                 .append(newline());
 

@@ -14,7 +14,6 @@
 		"chunk_view_distance": 8,
 		"entity_view_distance": 8,
 		"online_mode": true,
-		"optifine_support": true,
 		"terminal": false,
 		"benchmark": false
 	},

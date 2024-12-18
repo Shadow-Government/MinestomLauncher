@@ -1,11 +1,11 @@
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "8.3.5"
 }
 
 base {
     group = "com.thecrownstudios"
-    version = "1.2.4"
+    version = "1.3"
     archivesName = "minestom-launcher"
 }
 
@@ -82,20 +82,24 @@ dependencies {
     implementation("dev.hollowcube", "minestom-ce-extensions", "$minestom_extensions_version")
 
     // World formats
-    implementation("com.github.CatDevz", "SlimeLoader", "$slimeloader_version")
+    //implementation("com.github.CatDevz", "SlimeLoader", "$slimeloader_version")
     implementation("dev.hollowcube", "polar", "$polar_version")
 
     // Misc
     implementation("net.kyori", "adventure-text-minimessage", "$minimessage_version")
     implementation("com.fasterxml.jackson.core", "jackson-databind", "$jackson_version")
-    implementation("de.articdive", "jnoise-pipeline", "$jnoise_version")
+    //implementation("de.articdive", "jnoise-pipeline", "$jnoise_version")
 
     // Terminal & Logging
-    implementation("net.kyori", "ansi", "$ansi_version")
-    implementation("org.fusesource.jansi", "jansi", "$jansi_version")
-    implementation("org.jline", "jline", "$jline_version")
-    implementation("org.jline", "jline-terminal-jansi", "$jline_terminal_jansi_version")
-    implementation("org.apache.logging.log4j", "log4j-core", "$log4j_version")
+    implementation("org.jline:jline:3.27.1")
+    implementation("org.tinylog:tinylog-api:2.7.0")
+    implementation("org.tinylog:tinylog-impl:2.7.0")
+
+    //implementation("net.kyori", "ansi", "$ansi_version")
+    //implementation("org.fusesource.jansi", "jansi", "$jansi_version")
+    //implementation("org.jline", "jline", "$jline_version")
+    //implementation("org.jline", "jline-terminal-jansi", "$jline_terminal_jansi_version")
+    //implementation("org.apache.logging.log4j", "log4j-core", "$log4j_version")
 }
 
 tasks {

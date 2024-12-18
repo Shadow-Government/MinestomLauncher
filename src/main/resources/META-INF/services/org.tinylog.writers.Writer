@@ -1,4 +1,4 @@
-com.thecrownstudios.minestomlauncher.tinyterminal.MinestomConsoleWriter
+com.thecrownstudios.minestomlauncher.terminal.ColorizedConsoleWriter
 org.tinylog.writers.ConsoleWriter
 org.tinylog.writers.FileWriter
 org.tinylog.writers.JdbcWriter
